@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distractless YouTube!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <style>
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /*16:9*/
+        padding-top: 50px; 
+        height: 0; 
+        overflow: hidden;
+        width: 33vw;
+      }
+      
+      .video-container iframe,
+      .video-container object,
+      .video-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Distractless YouTube
+      </h1>
+      <p class="subtitle">
+        View YouTube videos <strong>without distractions</strong>!
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="field has-addons">
+        <p class="control is-expanded">
+          <input class="input is-primary is-medium ytlink" type="text" placeholder="YouTube video link">
+        </p>
+        <p class="control">
+          <a class="button is-medium is-primary" onclick="view();">
+            Watch!
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container level-item has-text-centered">
+      <div class="columns">
+        <div class="column video-container">
+            <iframe width="640" height="480" src="" allowfullscreen class="video"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    function view() {
+      var link = document.getElementsByClassName("ytlink")[0].value;
+      var frame = document.getElementsByClassName("video")[0];
+      var video_id = link.split('v=')[1];
+      var ampersandPosition = video_id.indexOf('&');
+      if(ampersandPosition != -1) {
+        video_id = video_id.substring(0, ampersandPosition);
+      }
+      frame.src = "https://www.youtube.com/embed/" + video_id + "?autoplay=1";
+    }
+  </script>
+  </body>
+</html>
